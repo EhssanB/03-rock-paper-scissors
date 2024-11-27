@@ -17,7 +17,7 @@ let randomChoice = () => {
     return Math.floor(Math.random()*3);
 }
 
-let checkResult = (userChoice,  computerChoice, userWins, computerWins) => {
+let checkResult = (userChoice,  computerChoice) => {
     
     if ((userChoice + 1) % 3 == computerChoice) {
         console.log("Player Won Round!");
@@ -30,31 +30,28 @@ let checkResult = (userChoice,  computerChoice, userWins, computerWins) => {
     }
 }
 
-let playRound = (winBalance, gameCounter) => {
+let playRound = (gameCounter) => {
     let userChoice = prompt("rock (0), paper (1) or scissors (2)");
     let computerChoice = randomChoice();
         
-    let roundResult = checkResult(userChoice, computerChoice);
-    
-    winBalance += roundResult;
+    checkResult(userChoice, computerChoice);
     gameCounter++;
-
-    return [winBalance, gameCounter]
 }
 
 let playGame = () => {
-    let winBalance = 0;
+    let userWins = 0;
+    let computerWins = 0;
     let gameCounter = 0;
 
     while (gameCounter < 5) {
-        let roundResult = playRound(winBalance, gameCounter);
-        winBalance = roundResult[0];
-        gameCounter = roundResult[1];
+        playRound(gameCounter);
     }
 
-    if (winBalance > 0) {
+    if (userWins == 3) {
         console.log("Player Wins!", winBalance, gameCounter);
-    } else {
+    } else if (computerWins == 3) {
         console.log("Computer Wins", winBalance, gameCounter);
+    } else {
+        console.log("Game is a draw!");
     }
 }
