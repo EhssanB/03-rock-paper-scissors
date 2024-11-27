@@ -17,17 +17,16 @@ let randomChoice = () => {
     return Math.floor(Math.random()*3);
 }
 
-let checkResult = (userChoice,  computerChoice) => {
+let checkResult = (userChoice,  computerChoice, userWins, computerWins) => {
     
     if ((userChoice + 1) % 3 == computerChoice) {
         console.log("Player Won Round!");
-        return 1;
+        userWins++;
     } else if ((computerChoice + 1) % 3 == userChoice) {
         console.log("Computer Won Round!");
-        return -1;
+        computerWins++;
     } else {
         console.log("Round Drawn!")
-        return 0;
     }
 }
 
