@@ -13,45 +13,36 @@
         // if user chooses the same, draw
         // else user loses
 
-let randomChoice = () => {
-    return Math.floor(Math.random()*3);
-}
+function playGame() {
 
-let checkResult = (userChoice,  computerChoice) => {
-    
-    if ((userChoice + 1) % 3 == computerChoice) {
-        console.log("Player Won Round!");
-        userWins++;
-    } else if ((computerChoice + 1) % 3 == userChoice) {
-        console.log("Computer Won Round!");
-        computerWins++;
-    } else {
-        console.log("Round Drawn!")
-    }
-}
-
-let playRound = (gameCounter) => {
-    let userChoice = prompt("rock (0), paper (1) or scissors (2)");
-    let computerChoice = randomChoice();
-        
-    checkResult(userChoice, computerChoice);
-    gameCounter++;
-}
-
-let playGame = () => {
     let userWins = 0;
     let computerWins = 0;
-    let gameCounter = 0;
 
-    while (gameCounter < 5) {
-        playRound(gameCounter);
+    let checkResult = (userChoice,  computerChoice) => {
+    
+        if ((userChoice + 1) % 3 == computerChoice) {
+            console.log("Player Won Round!");
+            userWins++;
+        } else if ((computerChoice + 1) % 3 == userChoice) {
+            console.log("Computer Won Round!");
+            computerWins++;
+        } else {
+            console.log("Round Drawn!")
+        }
+    }
+    
+    let playRound = () => {
+        let userChoice = parseInt(prompt("rock (0), paper (1) or scissors (2)"));
+        let computerChoice = Math.floor(Math.random()*3);
+            
+        checkResult(userChoice, computerChoice);
+    
     }
 
-    if (userWins == 3) {
-        console.log("Player Wins!", winBalance, gameCounter);
-    } else if (computerWins == 3) {
-        console.log("Computer Wins", winBalance, gameCounter);
-    } else {
-        console.log("Game is a draw!");
+    while (userWins < 3 && computerWins < 3) {
+        playRound();
     }
+
+    if (userWins == 3) console.log("Player Wins!");
+    if (computerWins == 3) console.log("Computer Wins");
 }
